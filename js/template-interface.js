@@ -4,6 +4,7 @@ $(document).ready(function() {
   $("#query").click(function(event) {
     event.preventDefault();
     getRepos($("#requestedUser").val());
+    $('#profileLink').show();
     $('#repositoryLink').show();
     });
   });

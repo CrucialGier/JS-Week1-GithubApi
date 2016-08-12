@@ -2,7 +2,6 @@ var apiKey = require('./../.env').apiKey;
 
 exports.getRepos = function(username){
   $.get('https://api.github.com/users/' + username + '?access_token=' + apiKey).then(function(response){
-    debugger;
     console.log(response);
     $("#portrait").attr('src', response.avatar_url);
     if (response.name === null) {
@@ -21,6 +20,10 @@ exports.getRepos = function(username){
       $('#email').text(response.email);
     }
     $('#profileLink').attr('href', "https://github.com/" + response.login);
-    $('#repositoryLink').attr('href', response.repos_url);
-  })
+    $.get(response.repos_url).then(function(repositories) {
+      for (var i = 0; i < repositories.length; i++) {
+        $('#repositoryLink').append('<p>' + repositories[i].name + ': ' + repositories[i].description + '</p>');
+      }
+    });
+  });
 };

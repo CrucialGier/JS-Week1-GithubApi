@@ -1,4 +1,4 @@
-var getRepos = require('./../js/template.js').getRepos;
+var getRepos = require('./../js/github-api.js').getRepos;
 
 $(document).ready(function() {
   $("#query").click(function(event) {
